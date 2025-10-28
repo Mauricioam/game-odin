@@ -1,7 +1,8 @@
-let paper = "paper";
-let rock = "rock";
-let siccor = "siccor";
+let paper = document.querySelector("#paper");
+let rock = document.querySelector("#rock");
+let siccor = document.querySelector("#siccor");
 
+console.log(paper, rock, siccor);
 function getRandom(min, max) {
   return Math.round(Math.random() * (max - min) + min);
 }
