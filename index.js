@@ -3,6 +3,7 @@ const rock = document.querySelector("#rock");
 const siccor = document.querySelector("#siccor");
 
 const container = document.querySelector("#container");
+const txtContainer = document.querySelector("#textContainer");
 
 container.addEventListener("click", playRound);
 
@@ -26,41 +27,45 @@ const userSelecTxt = document.createElement("p");
 const computerSelecTxt = document.createElement("p");
 const userScoreTxt = document.createElement("p");
 const compterScoreTxt = document.createElement("p");
+const textSelect = document.createElement("p");
 
-container.appendChild(userSelecTxt);
-container.appendChild(computerSelecTxt);
-container.appendChild(userScoreTxt);
-container.appendChild(compterScoreTxt);
+txtContainer.appendChild(userSelecTxt);
+txtContainer.appendChild(textSelect);
+txtContainer.appendChild(computerSelecTxt);
+txtContainer.appendChild(userScoreTxt);
+txtContainer.appendChild(compterScoreTxt);
 
 let humanScore = 0;
 let computerScore = 0;
 
 function playRound(event) {
   event.preventDefault();
-  userSelecTxt.innerText = event.target.value;
+  if (event.target.tagName == "BUTTON") {
+    userSelecTxt.innerText = event.target.value;
+    textSelect.innerText = `Player selected ${userSelecTxt.innerText}`;
+    computerSelecTxt.innerText = getComputerChoice();
 
-  computerSelecTxt.innerText = getComputerChoice();
+    if (userSelecTxt.innerText == computerSelecTxt.innerText) {
+    } else if (
+      userSelecTxt.innerText == "paper" &&
+      computerSelecTxt.innerText == "rock"
+    ) {
+      humanScore++;
+    } else if (
+      userSelecTxt.innerText == "rock" &&
+      computerSelecTxt.innerText == "siccor"
+    ) {
+      humanScore++;
+    } else if (
+      userSelecTxt.innerText == "siccor" &&
+      computerSelecTxt.innerText == "paper"
+    ) {
+      humanScore++;
+    } else {
+      computerScore++;
+    }
 
-  if (userSelecTxt.innerText == computerSelecTxt.innerText) {
-  } else if (
-    userSelecTxt.innerText == "paper" &&
-    computerSelecTxt.innerText == "rock"
-  ) {
-    humanScore++;
-  } else if (
-    userSelecTxt.innerText == "rock" &&
-    computerSelecTxt.innerText == "siccor"
-  ) {
-    humanScore++;
-  } else if (
-    userSelecTxt.innerText == "siccor" &&
-    computerSelecTxt.innerText == "paper"
-  ) {
-    humanScore++;
-  } else {
-    computerScore++;
+    userScoreTxt.innerText = `User Score: ${humanScore} `;
+    compterScoreTxt.innerText = `Computer score: ${computerScore}`;
   }
-
-  userScoreTxt.innerText = `User Score: ${humanScore} `;
-  compterScoreTxt.innerText = `Computer score: ${computerScore}`;
 }
