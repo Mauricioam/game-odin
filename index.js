@@ -23,49 +23,46 @@ function getComputerChoice() {
 //const computerSelection = getComputerChoice();
 let humanScore = 0;
 let computerScore = 0;
-function playRound(event) {
-  console.log(humanScore);
+const userSelecTxt = document.createElement("p");
+const computerSelecTxt = document.createElement("p");
+const userScoreTxt = document.createElement("p");
+const compterScoreTxt = document.createElement("p");
 
+container.appendChild(userSelecTxt);
+container.appendChild(computerSelecTxt);
+container.appendChild(userScoreTxt);
+container.appendChild(compterScoreTxt);
+
+function playRound(event) {
   event.preventDefault();
-  let humanOption = event.target.value;
-  let computerOption = getComputerChoice();
-  console.log(computerOption, humanOption);
-  if (humanOption == computerOption) return console.log("Tie!");
-  if (humanOption == "paper" && computerOption == "rock") {
+  userSelecTxt.innerText = `User selected ${event.target.value}`;
+
+  computerSelecTxt.innerText = `Computer selected ${getComputerChoice()}`;
+
+  if (userSelecTxt.innerText == computerSelecTxt.innerText)
+    return console.log("Tie!");
+  if (
+    userSelecTxt.innerText == "paper" &&
+    computerSelecTxt.innerText == "rock"
+  ) {
     humanScore++;
-    return console.log("Paper beats rock!");
+    return console.log("User wins");
   }
-  if (humanOption == "rock" && computerOption == "siccor") {
+  if (
+    userSelecTxt.innerText == "rock" &&
+    computerSelecTxt.innerText == "siccor"
+  ) {
     humanScore++;
-    return console.log("Rock crushed the siccor");
+    return console.log("User wins");
   }
-  if (humanOption == "siccor" && computerOption == "paper") {
+  if (
+    userSelecTxt.innerText == "siccor" &&
+    computerSelecTxt.innerText == "paper"
+  ) {
     humanScore++;
-    return console.log("OMG siccor murdered the paper");
+    return console.log("User wins");
   } else {
     computerScore++;
     return console.log("Computer wins");
   }
 }
-function playGame() {
-  let humanScore = 0;
-  let computerScore = 0;
-
-  // while (humanScore < 5 && computerScore < 5) {
-  //   console.log("Tus puntos:" + " " + humanScore);
-  //   console.log("Computadora:" + " " + computerScore);
-  //   playRound(getHumanChoice, getComputerChoice);
-  // }
-
-  // if (humanScore >= 5) {
-  //   console.log("Tus puntos:" + " " + humanScore);
-  //   console.log("Computadora:" + " " + computerScore);
-
-  //   console.log("You WiiN");
-  // } else if (computerScore >= 5) {
-  //   console.log("Tus puntos:" + " " + humanScore);
-  //   console.log("Computadora:" + " " + computerScore);
-  //   console.log("You LOOOSE");
-  // }
-}
-playGame();
