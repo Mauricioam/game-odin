@@ -16,7 +16,6 @@ function getComputerChoice() {
 function getHumanChoice() {
   const userInput = prompt("Mensaje");
   return userInput.toLowerCase();
-  
 }
 
 //const userSelection = getHumanChoice(); Solo llama una vez y queda un valor asignado a la variable
@@ -48,21 +47,21 @@ function playGame() {
     }
   }
 
-  while (humanScore < 5 && computerScore < 5) {
-    console.log("Tus puntos:" + " " + humanScore);
-    console.log("Computadora:" + " " + computerScore);
-    playRound(getHumanChoice, getComputerChoice);
-  }
+  // while (humanScore < 5 && computerScore < 5) {
+  //   console.log("Tus puntos:" + " " + humanScore);
+  //   console.log("Computadora:" + " " + computerScore);
+  //   playRound(getHumanChoice, getComputerChoice);
+  // }
 
-  if (humanScore >= 5) {
-    console.log("Tus puntos:" + " " + humanScore);
-    console.log("Computadora:" + " " + computerScore);
+  // if (humanScore >= 5) {
+  //   console.log("Tus puntos:" + " " + humanScore);
+  //   console.log("Computadora:" + " " + computerScore);
 
-    console.log("You WiiN");
-  } else if (computerScore >= 5) {
-    console.log("Tus puntos:" + " " + humanScore);
-    console.log("Computadora:" + " " + computerScore);
-    console.log("You LOOOSE");
-  }
+  //   console.log("You WiiN");
+  // } else if (computerScore >= 5) {
+  //   console.log("Tus puntos:" + " " + humanScore);
+  //   console.log("Computadora:" + " " + computerScore);
+  //   console.log("You LOOOSE");
+  // }
 }
 playGame();
