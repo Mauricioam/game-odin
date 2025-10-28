@@ -1,8 +1,16 @@
-let paper = document.querySelector("#paper");
-let rock = document.querySelector("#rock");
-let siccor = document.querySelector("#siccor");
+const paper = document.querySelector("#paper");
+const rock = document.querySelector("#rock");
+const siccor = document.querySelector("#siccor");
 
-console.log(paper, rock, siccor);
+const container = document.querySelector("#container");
+
+console.log(container);
+
+container.addEventListener("click", (event) => {
+  event.preventDefault();
+  console.log(event.target.value);
+});
+
 function getRandom(min, max) {
   return Math.round(Math.random() * (max - min) + min);
 }
