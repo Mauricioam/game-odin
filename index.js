@@ -21,8 +21,7 @@ function getComputerChoice() {
 // asi no se puede volver a llamar a la funcion
 
 //const computerSelection = getComputerChoice();
-let humanScore = 0;
-let computerScore = 0;
+
 const userSelecTxt = document.createElement("p");
 const computerSelecTxt = document.createElement("p");
 const userScoreTxt = document.createElement("p");
@@ -33,36 +32,35 @@ container.appendChild(computerSelecTxt);
 container.appendChild(userScoreTxt);
 container.appendChild(compterScoreTxt);
 
+let humanScore = 0;
+let computerScore = 0;
+
 function playRound(event) {
   event.preventDefault();
-  userSelecTxt.innerText = `User selected ${event.target.value}`;
+  userSelecTxt.innerText = event.target.value;
 
-  computerSelecTxt.innerText = `Computer selected ${getComputerChoice()}`;
+  computerSelecTxt.innerText = getComputerChoice();
 
-  if (userSelecTxt.innerText == computerSelecTxt.innerText)
-    return console.log("Tie!");
-  if (
+  if (userSelecTxt.innerText == computerSelecTxt.innerText) {
+  } else if (
     userSelecTxt.innerText == "paper" &&
     computerSelecTxt.innerText == "rock"
   ) {
     humanScore++;
-    return console.log("User wins");
-  }
-  if (
+  } else if (
     userSelecTxt.innerText == "rock" &&
     computerSelecTxt.innerText == "siccor"
   ) {
     humanScore++;
-    return console.log("User wins");
-  }
-  if (
+  } else if (
     userSelecTxt.innerText == "siccor" &&
     computerSelecTxt.innerText == "paper"
   ) {
     humanScore++;
-    return console.log("User wins");
   } else {
     computerScore++;
-    return console.log("Computer wins");
   }
+
+  userScoreTxt.innerText = `User Score: ${humanScore} `;
+  compterScoreTxt.innerText = `Computer score: ${computerScore}`;
 }
