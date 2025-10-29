@@ -38,29 +38,28 @@ txtContainer.appendChild(compterScoreTxt);
 let humanScore = 0;
 let computerScore = 0;
 
+const removeChildNodes = (nodes) => {
+  nodes.forEach((node) => {
+    node.remove();
+  });
+};
+
 function playRound(event) {
   event.preventDefault();
   if (event.target.tagName == "BUTTON") {
     if (humanScore < 5 && computerScore < 5) {
-      userSelecTxt.innerText = event.target.value;
-      textSelect.innerText = `Player selected ${userSelecTxt.innerText}`;
-      computerSelecTxt.innerText = getComputerChoice();
+      let playerSelect = event.target.value;
+      textSelect.innerText = `Player selected ${playerSelect}`;
 
-      if (userSelecTxt.innerText == computerSelecTxt.innerText) {
-      } else if (
-        userSelecTxt.innerText == "paper" &&
-        computerSelecTxt.innerText == "rock"
-      ) {
+      let compSelection = getComputerChoice();
+      computerSelecTxt.innerText = `Computer selected ${compSelection}`;
+
+      if (playerSelect == compSelection) {
+      } else if (playerSelect == "paper" && compSelection == "rock") {
         humanScore++;
-      } else if (
-        userSelecTxt.innerText == "rock" &&
-        computerSelecTxt.innerText == "siccor"
-      ) {
+      } else if (playerSelect == "rock" && compSelection == "siccor") {
         humanScore++;
-      } else if (
-        userSelecTxt.innerText == "siccor" &&
-        computerSelecTxt.innerText == "paper"
-      ) {
+      } else if (playerSelect == "siccor" && compSelection == "paper") {
         humanScore++;
       } else {
         computerScore++;
@@ -69,9 +68,10 @@ function playRound(event) {
       userScoreTxt.innerText = `User Score: ${humanScore} `;
       compterScoreTxt.innerText = `Computer score: ${computerScore}`;
     } else if (humanScore == 5) {
-      console.log("player won");
+      removeChildNodes(txtContainer.childNodes);
+      userSelecTxt.innerText = "Player won";
     } else {
-      console.log("computer won");
+      userSelecTxt.innerText = "Computer won";
     }
   }
 }
