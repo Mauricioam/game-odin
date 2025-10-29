@@ -41,31 +41,37 @@ let computerScore = 0;
 function playRound(event) {
   event.preventDefault();
   if (event.target.tagName == "BUTTON") {
-    userSelecTxt.innerText = event.target.value;
-    textSelect.innerText = `Player selected ${userSelecTxt.innerText}`;
-    computerSelecTxt.innerText = getComputerChoice();
+    if (humanScore < 5 && computerScore < 5) {
+      userSelecTxt.innerText = event.target.value;
+      textSelect.innerText = `Player selected ${userSelecTxt.innerText}`;
+      computerSelecTxt.innerText = getComputerChoice();
 
-    if (userSelecTxt.innerText == computerSelecTxt.innerText) {
-    } else if (
-      userSelecTxt.innerText == "paper" &&
-      computerSelecTxt.innerText == "rock"
-    ) {
-      humanScore++;
-    } else if (
-      userSelecTxt.innerText == "rock" &&
-      computerSelecTxt.innerText == "siccor"
-    ) {
-      humanScore++;
-    } else if (
-      userSelecTxt.innerText == "siccor" &&
-      computerSelecTxt.innerText == "paper"
-    ) {
-      humanScore++;
+      if (userSelecTxt.innerText == computerSelecTxt.innerText) {
+      } else if (
+        userSelecTxt.innerText == "paper" &&
+        computerSelecTxt.innerText == "rock"
+      ) {
+        humanScore++;
+      } else if (
+        userSelecTxt.innerText == "rock" &&
+        computerSelecTxt.innerText == "siccor"
+      ) {
+        humanScore++;
+      } else if (
+        userSelecTxt.innerText == "siccor" &&
+        computerSelecTxt.innerText == "paper"
+      ) {
+        humanScore++;
+      } else {
+        computerScore++;
+      }
+
+      userScoreTxt.innerText = `User Score: ${humanScore} `;
+      compterScoreTxt.innerText = `Computer score: ${computerScore}`;
+    } else if (humanScore == 5) {
+      console.log("player won");
     } else {
-      computerScore++;
+      console.log("computer won");
     }
-
-    userScoreTxt.innerText = `User Score: ${humanScore} `;
-    compterScoreTxt.innerText = `Computer score: ${computerScore}`;
   }
 }
