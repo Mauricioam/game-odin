@@ -33,16 +33,18 @@ const roundResult = document.createElement("p");
 txtContainer.appendChild(userSelecTxt);
 txtContainer.appendChild(textSelect);
 txtContainer.appendChild(computerSelecTxt);
-txtContainer.appendChild(userScoreTxt);
-txtContainer.appendChild(compterScoreTxt);
 container.appendChild(roundResult);
+container.appendChild(userScoreTxt);
+container.appendChild(compterScoreTxt);
 
 let humanScore = 0;
 let computerScore = 0;
 
 const removeChildNodes = (nodes) => {
   nodes.forEach((node) => {
-    node.remove();
+    if (node.tagName == "BUTTON") {
+      node.disabled = true;
+    }
   });
 };
 
@@ -70,6 +72,8 @@ const playRound = (playerSelec, compSelec) => {
 };
 
 const showWinner = () => {
+  txtContainer.remove();
+  removeChildNodes(container.childNodes);
   if (humanScore == 5) {
     roundResult.innerText = "Player won the game";
   } else {
