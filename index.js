@@ -3,6 +3,7 @@ const rock = document.querySelector("#rock");
 const siccor = document.querySelector("#siccor");
 
 const container = document.querySelector("#container");
+const btnContainer = document.querySelector(".btn-section");
 const txtContainer = document.querySelector("#textContainer");
 
 container.addEventListener("click", playGame);
@@ -29,13 +30,17 @@ const userScoreTxt = document.createElement("p");
 const compterScoreTxt = document.createElement("p");
 const textSelect = document.createElement("p");
 const roundResult = document.createElement("p");
+const refreshTxt = document.createElement("h2");
+const scoreDiv = document.createElement("div");
 
 txtContainer.appendChild(userSelecTxt);
 txtContainer.appendChild(textSelect);
 txtContainer.appendChild(computerSelecTxt);
 container.appendChild(roundResult);
-container.appendChild(userScoreTxt);
-container.appendChild(compterScoreTxt);
+container.appendChild(scoreDiv);
+scoreDiv.appendChild(userScoreTxt);
+scoreDiv.appendChild(compterScoreTxt);
+container.appendChild(refreshTxt);
 
 let humanScore = 0;
 let computerScore = 0;
@@ -81,23 +86,14 @@ const playRound = (playerSelec, compSelec) => {
 
 const showWinner = () => {
   txtContainer.remove();
-  removeChildNodes(container.childNodes);
+  removeChildNodes(btnContainer.childNodes);
   if (humanScore == 5) {
     roundResult.innerText = "Player won the game";
+    refreshTxt.innerText = "Refresh the page to play again";
   } else {
-    roundResult.innerText = "computer won the game";
+    roundResult.innerText = "Computer won the game";
+    refreshTxt.innerText = "Refresh the page to play again";
   }
-};
-
-const resetGame = () => {
-  const resetBtn = document.createElement("button");
-  txtContainer.appendChild(resetBtn);
-  resetBtn.addEventListener("click", resetValues);
-};
-
-const resetValues = () => {
-  activateBtns(container.childNodes);
-  txtContainer.remove();
 };
 
 function playGame(event) {
