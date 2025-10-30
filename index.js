@@ -5,7 +5,7 @@ const siccor = document.querySelector("#siccor");
 const container = document.querySelector("#container");
 const txtContainer = document.querySelector("#textContainer");
 
-container.addEventListener("click", playRound);
+container.addEventListener("click", playGame);
 
 function getRandom(min, max) {
   return Math.round(Math.random() * (max - min) + min);
@@ -46,7 +46,7 @@ const removeChildNodes = (nodes) => {
   });
 };
 
-const checkRound = (playerSelec, compSelec) => {
+const playRound = (playerSelec, compSelec) => {
   if (playerSelec == compSelec) {
     return (roundResult.innerText = "It's a tie!");
   }
@@ -55,49 +55,50 @@ const checkRound = (playerSelec, compSelec) => {
     case "paper_rock":
     case "siccor_paper":
       roundResult.innerText = "Player won round";
-      break;
+      return "player";
+
     case "siccor_rock":
     case "rock_paper":
     case "paper_siccor":
       roundResult.innerText = "Computer won";
-      break;
+      return "computer";
+
     default:
       roundResult.innerText = "Error";
       break;
   }
 };
 
-function playRound(event) {
+const showWinner = () => {
+  if (humanScore == 5) {
+    roundResult.innerText = "Player won the game";
+  } else {
+    roundResult.innerText = "computer won the game";
+  }
+};
+
+function playGame(event) {
   event.preventDefault();
   if (event.target.tagName == "BUTTON") {
-    if (humanScore < 5 && computerScore < 5) {
-      let playerSelect = event.target.value;
-      textSelect.innerText = `Player selected ${playerSelect}`;
+    let playerSelect = event.target.value;
+    textSelect.innerText = `Player selected ${playerSelect}`;
 
-      let compSelection = getComputerChoice();
-      computerSelecTxt.innerText = `Computer selected ${compSelection}`;
+    let compSelection = getComputerChoice();
+    computerSelecTxt.innerText = `Computer selected ${compSelection}`;
 
-      checkRound(playerSelect, compSelection);
+    let result = playRound(playerSelect, compSelection);
 
-      // if (playerSelect == compSelection) {
-      // } else if (playerSelect == "paper" && compSelection == "rock") {
-      //   humanScore++;
-      // } else if (playerSelect == "rock" && compSelection == "siccor") {
-      //   humanScore++;
-      // } else if (playerSelect == "siccor" && compSelection == "paper") {
-      //   humanScore++;
-      // } else {
-      //   computerScore++;
-      // }
+    if (result == "player") {
+      humanScore++;
+    } else if (result == "computer") {
+      computerScore++;
+    }
 
-      userScoreTxt.innerText = `User Score: ${humanScore} `;
-      compterScoreTxt.innerText = `Computer score: ${computerScore}`;
-    } else if (humanScore == 5) {
-      removeChildNodes(txtContainer.childNodes);
-      userSelecTxt.innerText = "Player won";
-    } else {
-      removeChildNodes(txtContainer.childNodes);
-      userSelecTxt.innerText = "Computer won";
+    userScoreTxt.innerText = `User Score: ${humanScore} `;
+    compterScoreTxt.innerText = `Computer score: ${computerScore}`;
+
+    if (humanScore == 5 || computerScore == 5) {
+      showWinner();
     }
   }
 }
