@@ -48,6 +48,14 @@ const removeChildNodes = (nodes) => {
   });
 };
 
+const activateBtns = (nodes) => {
+  nodes.forEach((node) => {
+    if (node.tagName == "BUTTON") {
+      node.disabled = false;
+    }
+  });
+};
+
 const playRound = (playerSelec, compSelec) => {
   if (playerSelec == compSelec) {
     return (roundResult.innerText = "It's a tie!");
@@ -81,14 +89,23 @@ const showWinner = () => {
   }
 };
 
+const resetGame = () => {
+  const resetBtn = document.createElement("button");
+  txtContainer.appendChild(resetBtn);
+  resetBtn.addEventListener("click", resetValues);
+};
+
+const resetValues = () => {
+  activateBtns(container.childNodes);
+  txtContainer.remove();
+};
+
 function playGame(event) {
   event.preventDefault();
   if (event.target.tagName == "BUTTON") {
     let playerSelect = event.target.value;
-    textSelect.innerText = `Player selected ${playerSelect}`;
-
     let compSelection = getComputerChoice();
-    computerSelecTxt.innerText = `Computer selected ${compSelection}`;
+    textSelect.innerText = `Player selected ${playerSelect} and computer selected ${compSelection} `;
 
     let result = playRound(playerSelect, compSelection);
 
